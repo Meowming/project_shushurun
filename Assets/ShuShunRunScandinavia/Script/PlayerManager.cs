@@ -4,13 +4,16 @@ using UnityEngine;
 
 public class PlayerManager : MonoBehaviour
 {
-    public float dollerAmount;
+    public int maxSanity = 100;
+    public int currentSanity = 100;
+    public float cashTarget;
+    public float cashAmount;
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("PickableObject"))
         {
-            dollerAmount += collision.gameObject.GetComponent<可拾取物>().doller;
+            cashAmount += collision.gameObject.GetComponent<可拾取物>().doller;
         }
     }
 }
