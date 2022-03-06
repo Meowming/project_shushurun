@@ -14,6 +14,12 @@ public class PlayerManager : MonoBehaviour
         if (collision.gameObject.CompareTag("PickableObject"))
         {
             cashAmount += collision.gameObject.GetComponent<ø… ∞»°ŒÔ>().doller;
+            
+        }
+        if (collision.gameObject.CompareTag("÷¬À¿’œ∞≠"))
+        {
+            Destroy(gameObject);
+            
         }
     }
 }

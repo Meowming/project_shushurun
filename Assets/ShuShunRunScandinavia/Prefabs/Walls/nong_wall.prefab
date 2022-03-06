@@ -45,7 +45,7 @@ GameObject:
   - component: {fileID: 7360216672718608112}
   m_Layer: 0
   m_Name: nong_wall
-  m_TagString: Untagged
+  m_TagString: "\u81F4\u6B7B\u969C\u788D"
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
