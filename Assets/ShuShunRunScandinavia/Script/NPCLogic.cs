@@ -14,7 +14,8 @@ public class NPCLogic : MonoBehaviour
     public bool isHavingSpeech = false;
     public float moveSpeed = 5f;
     public bool isFollowingPlayer = false;
-    public float playerDistanceEpsilon = 0.5f; // Mininum distance to chase the player
+    public float maxPlayerDistanceToChase = 10f;
+    public float minPlayerDistanceToChase = 0.5f; // Minimum distance to chase the player
     public AudioClip[] speechClips;
     public GameObject[] speechDisplays; // Sentence the NPC says when the player touches him
     public Transform speechPos;
@@ -98,7 +99,7 @@ public class NPCLogic : MonoBehaviour
         if (isFollowingPlayer)
         {
             Vector3 relativeVec = transform.position - GameplayManager.instance.player.transform.position;
-            if (Mathf.Abs(relativeVec.x) > playerDistanceEpsilon)
+            if (Mathf.Abs(relativeVec.x) > minPlayerDistanceToChase)
             {
                 if (relativeVec.x > 0) //player is on the left side
                 {

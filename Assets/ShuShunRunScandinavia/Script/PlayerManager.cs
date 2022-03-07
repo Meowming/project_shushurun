@@ -8,6 +8,7 @@ public class PlayerManager : MonoBehaviour
     public int currentSanity = 100;
     public float cashTarget;
     public float cashAmount;
+    public Animator animator;
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -20,6 +21,31 @@ public class PlayerManager : MonoBehaviour
         {
             Destroy(gameObject);
             
+        }
+    }
+
+    private void Start()
+    {
+        animator = GetComponent<Animator>();
+        StartCoroutine(SwitchHead());
+    }
+
+    IEnumerator SwitchHead()
+    {
+        while(true)
+        {
+            animator.Play("HeadNormal");
+            yield return new WaitForSeconds(2f);
+            animator.Play("HeadCryXd");
+            yield return new WaitForSeconds(2f);
+            animator.Play("HeadNormalXd");
+            yield return new WaitForSeconds(2f);
+            animator.Play("HeadLiuHan");
+            yield return new WaitForSeconds(2f);
+            animator.Play("HeadDead");
+            yield return new WaitForSeconds(2f);
+            animator.Play("HeadHappyXd");
+            yield return new WaitForSeconds(2f);
         }
     }
 }
