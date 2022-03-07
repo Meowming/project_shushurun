@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Fire
   - PickableObject
+  - "\u969C\u788D"
+  - "\u81F4\u6B7B\u969C\u788D"
   layers:
   - Default
   - TransparentFX
