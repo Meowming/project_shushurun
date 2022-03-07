@@ -43,3 +43,9 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Speech
+    uniqueID: 330270571
+    locked: 0
+  - name: Player
+    uniqueID: 3142663541
+    locked: 0

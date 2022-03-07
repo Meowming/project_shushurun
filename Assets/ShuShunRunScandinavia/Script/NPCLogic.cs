@@ -4,15 +4,42 @@ using UnityEngine;
 
 public class NPCLogic : MonoBehaviour
 {
+    public AudioSource audioSource;
     public bool isReduceSanityOnTouch = true;
     public bool isReduceMoneyOnTouch = true;
     public int sanityDamagePerSecond = 5;
     public int moneyDamagePerSecond = 100;
     public bool canDoDamage = true;
+    public bool isHavingSpeech = false;
+    public AudioClip[] speechClips;
+    public GameObject[] speechDisplays; // Sentence the NPC says when the player touches him
+    public Transform speechPos;
+    public float speechDuration = 5;
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            audioSource = GetComponent<AudioSource>();
+            if (speechDisplays.Length > 0 && !isHavingSpeech)
+            {
+                StartCoroutine(ShowSpeech());
+
+            }
+            if (speechClips.Length > 0 && isHavingSpeech)
+            {
+                audioSource.clip = speechClips[0];
+                if (!audioSource.isPlaying)
+                {
+                    audioSource.Play();
+                }
+            }
+        }
+    }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        // say sentence
+        
     }
 
     private void OnCollisionStay2D(Collision2D collision)
@@ -25,7 +52,30 @@ public class NPCLogic : MonoBehaviour
         }
     }
 
+    IEnumerator ShowSpeech()
+    {
+        isHavingSpeech = true;
+        int seq = Random.Range(0, speechDisplays.Length);
+        while (true)
+        {
+            if (seq >= speechDisplays.Length)
+            {
+                seq = 0;
+            }
+            GameObject speech = Instantiate(speechDisplays[seq], speechPos.position, speechPos.rotation, speechPos);
+            seq++;
+            yield return new WaitForSeconds(speechDuration);       
+            Destroy(speech);
+        }
+    }
+
     IEnumerator DoDamageCooldown()
+    {
+        yield return new WaitForSeconds(1f);
+        canDoDamage = true;
+    }
+
+    IEnumerator DetectPlayerDistance()
     {
         yield return new WaitForSeconds(1f);
         canDoDamage = true;
@@ -40,5 +90,6 @@ public class NPCLogic : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
     }
 }
